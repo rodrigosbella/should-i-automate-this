@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Should I Automate This?</title>
+    <link rel="stylesheet" href="src/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="hero">
+        <nav class="topbar">
+          <div class="brand">
+            <img class="brand-logo" src="assets/rsb-mark.svg" alt="RSB logo">
+            <span data-i18n="brand">Automation Worth It</span>
+          </div>
+          <div class="lang-toggle" aria-label="Language">
+            <button type="button" data-lang="en">EN</button>
+            <button type="button" class="active" data-lang="pt">PT</button>
+          </div>
+        </nav>
+
+        <section class="hero-grid">
+          <div class="hero-copy">
+            <div class="signature-line">
+              <span>RSB</span>
+              <span>Automation na veia</span>
+            </div>
+            <p class="eyebrow" data-i18n="eyebrow">Decision helper</p>
+            <h1 data-i18n="title">Should I automate this?</h1>
+            <p class="subtitle" data-i18n="subtitle">Estimate effort, payback, risk, and process maturity before turning a recurring task into automation.</p>
+            <div class="hero-actions">
+              <button type="button" id="loadExample" data-i18n="loadExample">Load example</button>
+              <button type="button" id="copySummary" class="primary" data-i18n="copySummary">Copy summary</button>
+            </div>
+          </div>
+
+          <div class="hero-score">
+            <div class="ring" id="scoreRing" style="--score: 82">
+              <span id="scoreValue">82</span>
+            </div>
+            <p data-i18n="scoreLabel">Automation score</p>
+            <strong id="heroRecommendation">Automate now</strong>
+          </div>
+        </section>
+      </header>
+
+      <section class="workspace">
+        <form class="panel form-panel" id="automationForm">
+          <div class="section-title">
+            <h2 data-i18n="taskProfile">Task profile</h2>
+            <p data-i18n="taskProfileHint">Describe the recurring work as it happens today.</p>
+          </div>
+
+          <label for="taskName" data-i18n="taskName">Task name</label>
+          <input id="taskName" value="Create monthly access report">
+
+          <div class="grid two">
+            <label>
+              <span data-i18n="minutesPerRun">Minutes per run</span>
+              <input id="minutesPerRun" type="number" min="1" value="30">
+            </label>
+
+            <label>
+              <span data-i18n="runsPerWeek">Runs per week</span>
+              <input id="runsPerWeek" type="number" min="0" step="0.5" value="5">
+            </label>
+          </div>
+
+          <div class="grid two">
+            <label>
+              <span data-i18n="peopleInvolved">People involved</span>
+              <input id="peopleInvolved" type="number" min="1" value="2">
+            </label>
+
+            <label>
+              <span data-i18n="buildHours">Build effort (hours)</span>
+              <input id="buildHours" type="number" min="0" step="0.5" value="8">
+            </label>
+          </div>
+
+          <label for="errorFrequency" data-i18n="errorFrequency">Error frequency</label>
+          <select id="errorFrequency"></select>
+
+          <label for="errorImpact" data-i18n="errorImpact">Error impact</label>
+          <select id="errorImpact"></select>
+
+          <label for="processStability" data-i18n="processStability">Process stability</label>
+          <select id="processStability"></select>
+
+          <label for="maintenanceEffort" data-i18n="maintenanceEffort">Maintenance effort</label>
+          <select id="maintenanceEffort"></select>
+
+          <div class="inline-result" id="inlineResult" data-i18n="ready">Ready</div>
+        </form>
+
+        <section class="results">
+          <div class="panel decision-panel">
+            <div>
+              <p class="eyebrow dark" data-i18n="recommendation">Recommendation</p>
+              <div class="decision" id="decisionText">Automate now</div>
+              <p class="decision-detail" id="decisionDetail">This task has strong volume, clear payback, and enough stability to justify automation.</p>
+            </div>
+            <span class="badge" id="scoreBadge">Score 82</span>
+          </div>
+
+          <div class="metrics">
+            <article>
+              <span data-i18n="hoursMonth">Hours/month</span>
+              <strong id="hoursMonth">21.7</strong>
+            </article>
+            <article>
+              <span data-i18n="hoursYear">Hours/year</span>
+              <strong id="hoursYear">260</strong>
+            </article>
+            <article>
+              <span data-i18n="payback">Payback</span>
+              <strong id="payback">0.4 mo</strong>
+            </article>
+            <article>
+              <span data-i18n="risk">Risk</span>
+              <strong id="riskLevel">Medium</strong>
+            </article>
+          </div>
+
+          <div class="panel chart-panel">
+            <div class="section-title">
+              <h2 data-i18n="decisionMap">Decision map</h2>
+              <p data-i18n="decisionMapHint">A quick view of value, effort, maturity, and operational risk.</p>
+            </div>
+
+            <div class="chart-layout">
+              <svg class="radar" viewBox="0 0 240 240" role="img" aria-label="Automation decision chart">
+                <g class="grid-lines">
+                  <polygon points="120,35 200,90 170,185 70,185 40,90"></polygon>
+                  <polygon points="120,57 176,96 155,163 85,163 64,96"></polygon>
+                  <polygon points="120,79 152,102 140,141 100,141 88,102"></polygon>
+                  <line x1="120" y1="120" x2="120" y2="35"></line>
+                  <line x1="120" y1="120" x2="200" y2="90"></line>
+                  <line x1="120" y1="120" x2="170" y2="185"></line>
+                  <line x1="120" y1="120" x2="70" y2="185"></line>
+                  <line x1="120" y1="120" x2="40" y2="90"></line>
+                </g>
+                <polygon id="radarShape" class="radar-shape" points=""></polygon>
+                <g class="labels">
+                  <text x="120" y="22" text-anchor="middle" data-i18n-svg="volume">Volume</text>
+                  <text x="214" y="88" text-anchor="start" data-i18n-svg="impact">Impact</text>
+                  <text x="178" y="207" text-anchor="middle" data-i18n-svg="maturity">Maturity</text>
+                  <text x="62" y="207" text-anchor="middle" data-i18n-svg="paybackAxis">Payback</text>
+                  <text x="27" y="88" text-anchor="end" data-i18n-svg="effort">Effort</text>
+                </g>
+              </svg>
+
+              <div class="factor-list" id="factorList"></div>
+            </div>
+          </div>
+
+          <div class="panel summary-panel">
+            <div class="section-title">
+              <h2 data-i18n="summaryTitle">Markdown summary</h2>
+              <p data-i18n="summaryHint">Copy this into a ticket, proposal, or documentation page.</p>
+            </div>
+            <textarea id="summary" readonly></textarea>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="src/app.js"></script>
+  </body>
+</html>
